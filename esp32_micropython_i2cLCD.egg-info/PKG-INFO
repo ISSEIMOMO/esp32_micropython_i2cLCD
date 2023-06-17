@@ -1,3 +1,16 @@
+Metadata-Version: 2.1
+Name: esp32-micropython-i2cLCD
+Version: 0.0.1
+Summary: uma biblioteca para utilização de um display i2c no esp32 micropython
+Home-page: UNKNOWN
+Author: issei momonge
+Author-email: mggyggf@gmail.com
+License: MIT License
+Keywords: esp32 micropython i2c LCD
+Platform: UNKNOWN
+Description-Content-Type: text/markdown
+License-File: LICENCE
+
 # I2C LCD micropython esp32
 
 import
@@ -44,15 +57,15 @@ print choices
     from time import sleep
     
     LCD.escolhas('txtprincipal', 0, ['1','2','3','4','5'])
-    
+
     x = 1
     while True:
         sleep(1)
         LCD.escolhas(posicao=x)
-        if x == 3:
-            print(LCD.escolhas(select=True))
-            break
         x+=1
+        if x == 3:
+            print(LCD.escolhas(posicao=x,select=True))
+            break
 
 lcd clear
 
@@ -66,14 +79,9 @@ especial char
 
     from time import sleep
     
-    b = bytearray([0x04,0x0A,0x04,0x0A,0x04,0x0A,0x04,0x0A])
-    
-    LCD.char(0,b)
-    
-    v = ' 1 \n 2 \n 3 \n 4 \n 5 \n '+chr(0)
-    # or v = ['1','2','3','4','5',chr(0)]
-    
-    LCD.println(v)
+    b = bytearray([...])
+    LCD.char(0,b)    
+    LCD.println(['1','2','3','4',char(0)])
     
     x = 2
     while True:
@@ -87,11 +95,3 @@ lcd hal backlight
 
     LCD.hal_backlight()
 
-lcd blink
-
-    LCD.brilhe(local=[1,1])
-    # or lcd not blink LCD.brilhe(False) 
-
-lcd animation for clear line
-    
-    LCD.apagarlinha(1)
